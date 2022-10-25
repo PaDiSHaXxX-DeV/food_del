@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:food_devilery/screens/home_page.dart';
+import 'package:food_devilery/screens/registr_page.dart';
 import 'package:food_devilery/screens/splash_page.dart';
 import 'package:food_devilery/utils/my_colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,6 +17,7 @@ class Sign_page extends StatefulWidget {
 final TextEditingController _nameController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
 final _dima = GlobalKey<FormState>();
+bool a=false;
 
 class _Sign_pageState extends State<Sign_page> {
   @override
@@ -69,7 +72,7 @@ class _Sign_pageState extends State<Sign_page> {
                     top: -50,
                     child: Container(
                       color: Colors.white,
-                      height: MediaQuery.of(context).size.height * 0.41,
+                      height: MediaQuery.of(context).size.height * 0.44,
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: Form(
                         key: _dima,
@@ -173,11 +176,13 @@ class _Sign_pageState extends State<Sign_page> {
                               ),
                             ),
                             const SizedBox(
-                              height: 40,
+                              height:40,
+
                             ),
                             InkWell(
                               onTap: () {
                                 if (_dima.currentState!.validate()) {
+                                  a=true;
                                   String email = _nameController.text.trim();
                                   String password =
                                       _passwordController.text.trim();
@@ -264,6 +269,28 @@ class _Sign_pageState extends State<Sign_page> {
                     ),
                   ),
                   Positioned(
+                    left: MediaQuery.of(context).size.width*0.33,
+                    bottom: 50,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: ((context) => Registr_page())));
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(3),
+                        decoration:const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius:BorderRadius.all(Radius.circular(12)) ),
+                        child: const Text(
+                          "Create new account",
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: My_colors.F2A902),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
                     bottom: 150,
                     left: 235,
                     child: InkWell(
@@ -278,16 +305,7 @@ class _Sign_pageState extends State<Sign_page> {
                       ),
                     ),
                   ),
-                  Positioned(
-                    top: MediaQuery.of(context).size.height * 0.53,
-                    child: Container(
-                      width: double.infinity,
-                      height: 30,
-                      decoration:const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(100))),
-                    ),
-                  )
+                  
                 ],
               ),
             ),
@@ -302,5 +320,5 @@ void saveLogin(context) async {
   SharedPreferences _pref = await SharedPreferences.getInstance();
   _pref.setBool("isLoggedIn", true);
   Navigator.pushReplacement(
-      context, MaterialPageRoute(builder: (context) => Splash_page()));
+      context, MaterialPageRoute(builder: (context) => Home_page()));
 }
