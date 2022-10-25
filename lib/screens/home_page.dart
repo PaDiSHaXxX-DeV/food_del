@@ -25,6 +25,7 @@ class _Home_pageState extends State<Home_page> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
+            padding: EdgeInsets.only(bottom: 30),
             child: Column(
               children: [
                 Container(
@@ -215,6 +216,43 @@ class _Home_pageState extends State<Home_page> {
                               );
                             },
                             itemCount: K_model.k_models.length),
+                      ),
+                      SizedBox(height: 16,),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 20,left: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              children: [
+                                Text("Popular Restaurants Nearby",style: TextStyle(fontSize: 20),),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 30),
+                                  child: Text("Some of them offer rescued food.",style: TextStyle(color: Color(0xff868686)),),
+                                )
+
+                              ],
+                            ),
+                            Container(
+                              width: 53,
+                              height: 39,
+                              decoration: BoxDecoration(border: Border.all(width: 1,color: Colors.grey),borderRadius: BorderRadius.circular(14)),
+                              child: Center(child: Text("ALL >",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w700,color: Color(0xff707070)),)),
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 14,),
+                      Container(
+                        width: double.infinity,
+                        height: 280,
+                        child: ListView.builder(itemCount: 4,shrinkWrap: true,scrollDirection: Axis.horizontal,itemBuilder: (BuildContext context,index)=>kol())
+                      ),
+                      SizedBox(height: 20,),
+                      Container(
+                        width: 365,
+                        height: 190,
+                        decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/img_2.png"),scale: 0.4,fit: BoxFit.cover)),
                       )
                     ],
                   ),
@@ -224,38 +262,6 @@ class _Home_pageState extends State<Home_page> {
           ),
         ),
       ),
-      //       bottomNavigationBar: BottomNavigationBar(
-      //         type: BottomNavigationBarType.fixed,
-      //         backgroundColor: My_colors.backround_E5E5E5,
-      //         selectedItemColor: My_colors.F2A902,
-      //         unselectedItemColor: Colors.grey.withOpacity(.60),
-      //         selectedFontSize: 14,
-      //         unselectedFontSize: 14,
-      //         onTap: (value) {
-      //           // Respond to item press.
-      //         },
-      //         items: const [
-      //           BottomNavigationBarItem(
-      //             label: '',
-      //             icon: Icon(Icons.home_filled),
-      //           ),
-      //           BottomNavigationBarItem(
-      //             label: '',
-      //             icon: Icon(Icons.cast_outlined),
-      //           ),
-      //           BottomNavigationBarItem(
-      //             label: '',
-      //             icon: Icon(Icons.comment_outlined),
-      //           ),
-      //           BottomNavigationBarItem(
-      //             label: '',
-      //             icon: Icon(Icons.favorite_outline),
-      //           ),
-      //           BottomNavigationBarItem(
-      //             label: '',
-      //             icon: Icon(Icons.person_outline),
-      //           ),
-      //         ],
     );
   }
 }
@@ -631,5 +637,41 @@ Widget lipi(int index) {
         ),
       )
     ],
+  );
+}
+
+Widget kol(){
+  return Container(
+    margin: EdgeInsets.only(right: 8,left: 8),
+    child: Column(children: [
+      Container(
+        width: 196,
+        height: 138,
+        decoration: BoxDecoration(boxShadow: [BoxShadow(offset: Offset(0, 0),blurRadius: 1.5,color: Colors.black)],borderRadius: BorderRadius.only(topRight: Radius.circular(10),topLeft: Radius.circular(10)),image: DecorationImage(image: AssetImage("${K_model.k_models[Imageindicator].img}"),fit: BoxFit.cover),color: Colors.red),
+      ),
+      Container(
+        width: 196,
+        height: 138,
+        decoration: BoxDecoration(boxShadow: [BoxShadow(offset: Offset(0, 0),blurRadius: 1.5,color: Colors.black)],borderRadius: BorderRadius.only(bottomRight: Radius.circular(10),bottomLeft: Radius.circular(10)),color: Colors.white),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 10,top: 20),
+              child: Text("${K_model.k_models[Imageindicator].name}",style: TextStyle(fontSize: 17,fontWeight: FontWeight.w600),),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text("${K_model.k_models[Imageindicator].nametwo}",style: TextStyle(color: Color(0xff868686)),),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 170,top: 50),
+              child: Image.asset("assets/images/img.png",scale: 2,),
+            )
+          ],
+        ),
+      ),
+
+    ],),
   );
 }
